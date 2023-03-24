@@ -1,0 +1,70 @@
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="hms_action">
+            <field name="name">Patients</field>
+            <field name="res_model">hms.patient</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="HmsMenu" name="Patients" />
+        <menuitem id="hms_patient_menu" name="Patients" parent="HmsMenu" action="hms_action"/>
+        <record id="view_patient_form" model="ir.ui.view">
+            <field name="name">hms.patient.form</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <form string="Patient">
+                    <sheet>
+                        <group>
+                            <field name="firstname" attrs="{'required':True}"/>
+                            <field name="lastname" attrs="{'required':True}"/>
+                            <field name="email"/>
+                            <field name="birthdate"/>
+                            <field name="history" attrs="{'invisible': [('age', '&lt;', 50)]}"/>
+                            <field name="cr_ratio" attrs="{'required': [('pcr', '=', True)]}"/>
+                            <field name="bloodtype"/>
+                            <field name="pcr"/>
+                            <field name="image"/>
+                            <field name="address"/>
+                            <field name="age"/>
+                            <field name="state"/>
+                            <field name="department" domain ="[('is_open', '=', True)]"/>
+                            <field name="doctor"  widget="many2many_tags" attrs="{'readonly': [('department', '=', False)]}"/>
+                            <notebook>
+                                <page string='log_history'>
+                                    <field name='log_id' mode='tree'>
+                                        <tree string='logs'>
+                                            <field name="create_uid"/>
+                                            <field name="create_date"/>
+                                            <field name="description"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hms_patient_view_tree" model="ir.ui.view">
+            <field name="name">hms.patient.tree</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <tree>
+                            <field name="firstname"/>
+                            <field name="lastname"/>
+                            <field name="email"/>
+                            <field name="birthdate"/>
+                            <field name="history" />
+                            <field name="cr_ratio"/>
+                            <field name="bloodtype"/>
+                            <field name="pcr"/>
+                            <field name="image"/>
+                            <field name="address"/>
+                            <field name="age"/>
+                            <field name="state"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+

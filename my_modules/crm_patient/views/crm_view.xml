@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="crm_lead_form_view_inherit">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='misc']" position="inside">
+                    <field name="related_patient_id"/>
+                </xpath>
+                <xpath expr="//field[@name='website']" position="inside">
+                    <field name="website"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
